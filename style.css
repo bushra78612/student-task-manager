@@ -1,0 +1,242 @@
+:root {
+    --navy: #0f172a;
+    --navy-2: #1e293b;
+    --ink: #0f172a;
+    --muted: #475569;
+    --line: #e2e0d8;
+    --gold: linear-gradient(135deg, #f6dc8f 0%, #e0b04f 50%, #b8892d 100%);
+    --gold-solid: #b8892d;
+    --done: #047857;
+    --danger: #b91c1c;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: "DM Sans", Arial, sans-serif;
+    color: var(--ink);
+    line-height: 1.5;
+    min-height: 100vh;
+    background: linear-gradient(180deg, #f8f6f1 0%, #e9ecf3 100%) fixed;
+}
+
+h1, h2, h3 { font-family: "Bricolage Grotesque", Arial, sans-serif; }
+
+.hero {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 60%, #334155 100%);
+    color: #fff;
+    text-align: center;
+    padding: 56px 20px 100px;
+    border-bottom: 5px solid transparent;
+    border-image: var(--gold) 1;
+}
+
+h1 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 800; line-height: 1.1; }
+
+.subtitle { margin-top: 14px; color: #e8dcc0; font-size: 1.05rem; }
+
+.layout {
+    max-width: 1000px;
+    margin: -60px auto 40px;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 24px;
+    align-items: start;
+}
+
+.task-form, .task-section {
+    background: #fff;
+    border-radius: 16px;
+    padding: 26px;
+    box-shadow: 0 14px 34px rgba(15, 23, 42, .16);
+}
+
+.task-form { position: sticky; top: 20px; border-top: 5px solid transparent; border-image: var(--gold) 1; }
+
+h2 { font-size: 1.3rem; margin-bottom: 16px; }
+
+label { display: block; font-weight: 700; font-size: .9rem; margin-bottom: 6px; }
+
+input[type="text"], textarea {
+    width: 100%;
+    padding: 12px 14px;
+    margin-bottom: 16px;
+    border: 1.5px solid #cbd5e1;
+    border-radius: 10px;
+    font: inherit;
+    color: var(--ink);
+    background: #fbfbfd;
+    transition: border-color .2s, box-shadow .2s;
+}
+
+textarea { min-height: 110px; resize: vertical; }
+
+input:focus, textarea:focus {
+    outline: none;
+    border-color: var(--gold-solid);
+    box-shadow: 0 0 0 3px rgba(224, 176, 79, .4);
+}
+
+button { font: inherit; cursor: pointer; }
+button:focus-visible { outline: 3px solid var(--gold-solid); outline-offset: 2px; }
+
+.btn-primary {
+    width: 100%;
+    padding: 13px;
+    border: none;
+    border-radius: 10px;
+    background: var(--gold);
+    color: var(--navy);
+    font-weight: 700;
+    transition: transform .15s, box-shadow .2s;
+}
+.btn-primary:hover { box-shadow: 0 6px 18px rgba(184, 137, 45, .5); }
+.btn-primary:active { transform: scale(.98); }
+
+#errorMessage { margin-top: 10px; color: var(--danger); font-size: .9rem; font-weight: 700; min-height: 1.2em; }
+
+.progress-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; flex-wrap: wrap; }
+.progress-head h2 { margin-bottom: 2px; }
+#progressText { color: var(--muted); font-size: .9rem; }
+
+.filters { display: flex; gap: 4px; background: #eef0f5; padding: 4px; border-radius: 12px; }
+.filter { border: none; background: transparent; padding: 6px 14px; border-radius: 8px; color: var(--muted); font-weight: 500; font-size: .9rem; }
+.filter.active { background: var(--navy); color: #f6dc8f; }
+
+.bar { height: 10px; background: #eef0f5; border-radius: 99px; margin: 16px 0 20px; overflow: hidden; }
+.bar span { display: block; height: 100%; width: 0; background: var(--gold); border-radius: 99px; transition: width .4s ease; }
+
+#taskList { display: flex; flex-direction: column; gap: 12px; }
+
+.task {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 14px;
+    align-items: start;
+    padding: 16px;
+    border-radius: 12px;
+    background: #fff;
+    border: 1.5px solid var(--line);
+    border-left: 6px solid var(--gold-solid);
+    animation: pop .25s ease;
+}
+.task.done { background: #f3faf6; border-left-color: var(--done); }
+.task.done h3, .task.done p { text-decoration: line-through; color: var(--muted); }
+
+.task-top { display: contents; }
+.task input[type="checkbox"] { width: 22px; height: 22px; margin-top: 2px; accent-color: #047857; cursor: pointer; }
+.task-body { order: 2; min-width: 0; }
+.delete { order: 3; }
+
+.task h3 { font-size: 1.1rem; margin-bottom: 4px; overflow-wrap: anywhere; }
+.task p { color: var(--muted); overflow-wrap: anywhere; }
+
+.delete {
+    border: 1.5px solid var(--danger);
+    background: #fff;
+    color: var(--danger);
+    font-size: .85rem;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 8px;
+}
+.delete:hover { background: var(--danger); color: #fff; }
+
+.empty { text-align: center; color: var(--muted); padding: 30px 10px; }
+
+@keyframes pop { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+@media (max-width: 800px) {
+    .layout { grid-template-columns: 1fr; }
+    .task-form { position: static; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+}
+
+/* ===== Designs & hover effects ===== */
+
+/* Hero decoration: gold glows + fine diagonal lines */
+.hero { position: relative; overflow: hidden; isolation: isolate; }
+.hero::before {
+    content: "";
+    position: absolute; inset: 0; z-index: -1;
+    background:
+        radial-gradient(circle at 12% 20%, rgba(224, 176, 79, .28), transparent 38%),
+        radial-gradient(circle at 88% 80%, rgba(246, 220, 143, .2), transparent 42%),
+        repeating-linear-gradient(135deg, rgba(255, 255, 255, .04) 0 2px, transparent 2px 22px);
+}
+.hero::after {
+    content: "";
+    position: absolute; z-index: -1;
+    width: 260px; height: 260px;
+    right: -70px; top: -90px;
+    border: 2px solid rgba(246, 220, 143, .35);
+    border-radius: 50%;
+    box-shadow: 0 0 0 28px rgba(246, 220, 143, .07), 0 0 0 58px rgba(246, 220, 143, .04);
+}
+.hero h1, .hero .subtitle { animation: rise .8s ease both; }
+.hero .subtitle { animation-delay: .15s; }
+@keyframes rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+
+/* Panels */
+.task-form, .task-section { transition: transform .3s ease, box-shadow .3s ease; }
+.task-form:hover, .task-section:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 22px 44px rgba(15, 23, 42, .22);
+}
+
+/* Inputs */
+input[type="text"]:hover, textarea:hover { border-color: var(--gold-solid); background: #fff; }
+
+/* Button: shine sweep */
+.btn-primary { position: relative; overflow: hidden; }
+.btn-primary::after {
+    content: "";
+    position: absolute; top: 0; left: -80%;
+    width: 50%; height: 100%;
+    background: linear-gradient(100deg, transparent, rgba(255, 255, 255, .65), transparent);
+    transform: skewX(-20deg);
+    transition: left .6s ease;
+}
+.btn-primary:hover::after { left: 130%; }
+.btn-primary:hover { transform: translateY(-2px); }
+
+/* Filters */
+.filter { transition: background .2s, color .2s, transform .2s; }
+.filter:not(.active):hover { background: #fff; color: var(--navy); transform: translateY(-1px); }
+
+/* Task cards */
+.task {
+    transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease, background .25s ease;
+}
+.task:hover {
+    transform: translateX(8px);
+    box-shadow: 0 10px 24px rgba(15, 23, 42, .14), -6px 0 0 -2px rgba(224, 176, 79, .5);
+    border-color: #d9c48f;
+    background: linear-gradient(90deg, #fffaf0 0%, #fff 60%);
+}
+.task.done:hover { background: linear-gradient(90deg, #e6f6ee 0%, #fff 60%); border-color: #9bd5b8; }
+.task h3 { transition: color .2s; }
+.task:hover h3 { color: #7a5a14; }
+.task.done:hover h3 { color: var(--muted); }
+
+/* Checkbox & delete */
+.task input[type="checkbox"] { transition: transform .2s; }
+.task input[type="checkbox"]:hover { transform: scale(1.2); }
+.delete { transition: background .2s, color .2s, transform .2s, box-shadow .2s; }
+.delete:hover { transform: scale(1.08); box-shadow: 0 4px 10px rgba(185, 28, 28, .3); }
+
+/* Progress bar shimmer */
+.bar span {
+    background-image: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, .55) 50%, transparent 70%), var(--gold);
+    background-size: 200% 100%, 100% 100%;
+    animation: shimmer 2.4s linear infinite;
+}
+@keyframes shimmer { from { background-position: 200% 0, 0 0; } to { background-position: -100% 0, 0 0; } }
+
+@media (max-width: 800px) {
+    .task:hover { transform: translateY(-3px); }
+}

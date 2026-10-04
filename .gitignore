@@ -1,0 +1,17 @@
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# Editor settings
+.vscode/
+.idea/
+
+# Log files
+*.log
+
+# Maven generated files
+target/
+
+# Temporary files
+*.tmp
+*.temp
