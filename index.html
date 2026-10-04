@@ -3,50 +3,126 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Student Task Management System</title>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
     <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+
     <header class="hero">
+
         <h1>Student Task Management System</h1>
-        
-        <p class="subtitle">Plan, organize and complete your academic tasks easily.</p>
+
+        <p class="subtitle">
+            Plan, organize and complete your academic tasks easily.
+        </p>
+
     </header>
 
+
     <main class="layout">
+
+        <!-- Add New Task Section -->
         <section class="task-form">
+
             <h2>Add New Task</h2>
+
             <label for="taskTitle">Title</label>
-            <input type="text" id="taskTitle" placeholder="e.g. Finish SQL lab report" maxlength="80">
+
+            <input
+                type="text"
+                id="taskTitle"
+                placeholder="e.g. Finish SQL lab report"
+                maxlength="80"
+            >
+
 
             <label for="taskDescription">Description</label>
-            <textarea id="taskDescription" placeholder="What needs to be done?"></textarea>
 
-            <button class="btn-primary" onclick="addTask()">Add task</button>
+            <textarea
+                id="taskDescription"
+                placeholder="What needs to be done?"
+            ></textarea>
+
+
+            <button class="btn-primary" onclick="addTask()">
+                Add task
+            </button>
+
             <p id="errorMessage" role="alert"></p>
+
         </section>
 
+
+        <!-- Student Tasks Section -->
         <section class="task-section">
-            <div class="progress-head">
-                <div>
-                    <h2>Student Tasks</h2>
-                    <p id="progressText">0 of 0 done</p>
-                </div>
-                <div class="filters" role="group" aria-label="Filter tasks">
-                    <button class="filter active" data-filter="all">All</button>
-                    <button class="filter" data-filter="active">To do</button>
-                    <button class="filter" data-filter="done">Done</button>
-                </div>
-            </div>
-            <div class="bar"><span id="barFill"></span></div>
 
+            <div class="progress-head">
+
+                <div>
+
+                    <h2>Student Tasks</h2>
+
+                    <p id="progressText">
+                        0 of 0 done
+                    </p>
+
+                </div>
+
+
+                <!-- Task Filters -->
+                <div class="filters" role="group" aria-label="Filter tasks">
+
+                    <button
+                        class="filter active"
+                        data-filter="all"
+                    >
+                        All
+                    </button>
+
+                    <button
+                        class="filter"
+                        data-filter="active"
+                    >
+                        To do
+                    </button>
+
+                    <button
+                        class="filter"
+                        data-filter="done"
+                    >
+                        Done
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- Progress Bar -->
+            <div class="bar">
+
+                <span id="barFill"></span>
+
+            </div>
+
+
+            <!-- Tasks will appear here -->
             <div id="taskList"></div>
+
         </section>
+
     </main>
 
+
     <script src="script.js"></script>
+
 </body>
 </html>
