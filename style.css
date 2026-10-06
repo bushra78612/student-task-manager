@@ -1,704 +1,356 @@
-:root {
-    --navy: #0f172a;
-    --navy-2: #1e293b;
-    --ink: #0f172a;
-    --muted: #475569;
-    --line: #e2e0d8;
-    --gold: linear-gradient(135deg, #f6dc8f 0%, #e0b04f 50%, #b8892d 100%);
-    --gold-solid: #b8892d;
-    --done: #047857;
-    --danger: #b91c1c;
-}
-
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
+
 body {
-    font-family: "DM Sans", Arial, sans-serif;
-    color: var(--ink);
-    line-height: 1.5;
+    font-family: "DM Sans", sans-serif;
+    background: #f5f7fb;
+    color: #172033;
     min-height: 100vh;
-    background: linear-gradient(180deg, #f8f6f1 0%, #e9ecf3 100%) fixed;
-}
-
-h1,
-h2,
-h3 {
-    font-family: "Bricolage Grotesque", Arial, sans-serif;
 }
 
 
-/* =========================
-   HERO SECTION
-========================= */
+/* HERO */
 
 .hero {
-    background: linear-gradient(
-        135deg,
-        var(--navy) 0%,
-        var(--navy-2) 60%,
-        #334155 100%
-    );
-
-    color: #fff;
+    background: #172033;
+    color: white;
+    padding: 45px 20px;
     text-align: center;
-    padding: 56px 20px 100px;
-    border-bottom: 5px solid transparent;
-    border-image: var(--gold) 1;
-
-    position: relative;
-    overflow: hidden;
-    isolation: isolate;
 }
 
-.hero::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: -1;
 
-    background:
-        radial-gradient(
-            circle at 12% 20%,
-            rgba(224, 176, 79, 0.28),
-            transparent 38%
-        ),
-        radial-gradient(
-            circle at 88% 80%,
-            rgba(246, 220, 143, 0.2),
-            transparent 42%
-        ),
-        repeating-linear-gradient(
-            135deg,
-            rgba(255, 255, 255, 0.04) 0 2px,
-            transparent 2px 22px
-        );
-}
-
-.hero::after {
-    content: "";
-    position: absolute;
-    z-index: -1;
-
-    width: 260px;
-    height: 260px;
-
-    right: -70px;
-    top: -90px;
-
-    border: 2px solid rgba(246, 220, 143, 0.35);
-    border-radius: 50%;
-
-    box-shadow:
-        0 0 0 28px rgba(246, 220, 143, 0.07),
-        0 0 0 58px rgba(246, 220, 143, 0.04);
-}
-
-h1 {
-    font-size: clamp(2rem, 5vw, 3.2rem);
+.hero h1 {
+    font-family: "Bricolage Grotesque", sans-serif;
+    font-size: 2.5rem;
     font-weight: 800;
-    line-height: 1.1;
+    margin-bottom: 10px;
 }
+
 
 .subtitle {
-    margin-top: 14px;
-    color: #e8dcc0;
-    font-size: 1.05rem;
-}
-
-.hero h1,
-.hero .subtitle {
-    animation: rise 0.8s ease both;
-}
-
-.hero .subtitle {
-    animation-delay: 0.15s;
-}
-
-@keyframes rise {
-    from {
-        opacity: 0;
-        transform: translateY(16px);
-    }
-
-    to {
-        opacity: 1;
-        transform: none;
-    }
+    font-size: 1rem;
+    opacity: 0.85;
 }
 
 
-/* =========================
-   MAIN LAYOUT
-========================= */
+/* MAIN LAYOUT */
 
 .layout {
-    max-width: 1000px;
-    margin: -60px auto 40px;
-    padding: 0 20px;
-
+    width: min(1100px, 92%);
+    margin: 35px auto;
     display: grid;
-    grid-template-columns: 320px 1fr;
-    gap: 24px;
-    align-items: start;
+    grid-template-columns: 330px 1fr;
+    gap: 25px;
 }
 
 
-/* =========================
-   FORM & TASK SECTION
-========================= */
-
-.task-form,
-.task-section {
-    background: #fff;
-    border-radius: 16px;
-    padding: 26px;
-
-    box-shadow: 0 14px 34px rgba(15, 23, 42, 0.16);
-
-    transition:
-        transform 0.3s ease,
-        box-shadow 0.3s ease;
-}
+/* FORM */
 
 .task-form {
-    position: sticky;
-    top: 20px;
-
-    border-top: 5px solid transparent;
-    border-image: var(--gold) 1;
-}
-
-.task-form:hover,
-.task-section:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 22px 44px rgba(15, 23, 42, 0.22);
-}
-
-h2 {
-    font-size: 1.3rem;
-    margin-bottom: 16px;
+    background: white;
+    border-radius: 14px;
+    padding: 25px;
+    box-shadow: 0 8px 25px rgba(23, 32, 51, 0.08);
 }
 
 
-/* =========================
-   FORM INPUTS
-========================= */
+.task-form h2,
+.task-section h2 {
+    font-family: "Bricolage Grotesque", sans-serif;
+    margin-bottom: 18px;
+}
 
-label {
+
+.task-form label {
     display: block;
+    margin-top: 15px;
+    margin-bottom: 7px;
     font-weight: 700;
     font-size: 0.9rem;
-    margin-bottom: 6px;
 }
 
-input[type="text"],
-textarea {
+
+.task-form input,
+.task-form textarea,
+.task-form select {
     width: 100%;
-
-    padding: 12px 14px;
-    margin-bottom: 16px;
-
-    border: 1.5px solid #cbd5e1;
-    border-radius: 10px;
-
-    font: inherit;
-    color: var(--ink);
-
-    background: #fbfbfd;
-
-    transition:
-        border-color 0.2s,
-        box-shadow 0.2s,
-        background 0.2s;
+    border: 1px solid #d8deea;
+    border-radius: 8px;
+    padding: 11px 12px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    background: white;
 }
 
-textarea {
-    min-height: 110px;
+
+.task-form textarea {
+    min-height: 100px;
     resize: vertical;
 }
 
-input[type="text"]:focus,
-textarea:focus {
+
+.task-form input:focus,
+.task-form textarea:focus,
+.task-form select:focus {
     outline: none;
-
-    border-color: var(--gold-solid);
-
-    box-shadow:
-        0 0 0 3px rgba(224, 176, 79, 0.4);
-}
-
-input[type="text"]:hover,
-textarea:hover {
-    border-color: var(--gold-solid);
-    background: #fff;
+    border-color: #5969d8;
+    box-shadow: 0 0 0 3px rgba(89, 105, 216, 0.12);
 }
 
 
-/* =========================
-   BUTTONS
-========================= */
-
-button {
-    font: inherit;
-    cursor: pointer;
-}
-
-button:focus-visible {
-    outline: 3px solid var(--gold-solid);
-    outline-offset: 2px;
-}
+/* BUTTON */
 
 .btn-primary {
     width: 100%;
-
-    padding: 13px;
-
     border: none;
-    border-radius: 10px;
-
-    background: var(--gold);
-    color: var(--navy);
-
+    border-radius: 8px;
+    padding: 12px;
+    margin-top: 20px;
+    background: #172033;
+    color: white;
+    font-family: inherit;
     font-weight: 700;
-
-    position: relative;
-    overflow: hidden;
-
-    transition:
-        transform 0.15s,
-        box-shadow 0.2s;
+    cursor: pointer;
 }
+
 
 .btn-primary:hover {
-    box-shadow: 0 6px 18px rgba(184, 137, 45, 0.5);
-    transform: translateY(-2px);
+    opacity: 0.9;
 }
 
-.btn-primary:active {
-    transform: scale(0.98);
-}
-
-.btn-primary::after {
-    content: "";
-
-    position: absolute;
-    top: 0;
-    left: -80%;
-
-    width: 50%;
-    height: 100%;
-
-    background: linear-gradient(
-        100deg,
-        transparent,
-        rgba(255, 255, 255, 0.65),
-        transparent
-    );
-
-    transform: skewX(-20deg);
-
-    transition: left 0.6s ease;
-}
-
-.btn-primary:hover::after {
-    left: 130%;
-}
-
-
-/* =========================
-   ERROR MESSAGE
-========================= */
 
 #errorMessage {
+    color: #c0392b;
     margin-top: 10px;
-
-    color: var(--danger);
-    font-size: 0.9rem;
-    font-weight: 700;
-
-    min-height: 1.2em;
+    font-size: 0.85rem;
+    min-height: 18px;
 }
 
 
-/* =========================
-   PROGRESS & FILTERS
-========================= */
+/* TASK SECTION */
+
+.task-section {
+    background: white;
+    border-radius: 14px;
+    padding: 25px;
+    box-shadow: 0 8px 25px rgba(23, 32, 51, 0.08);
+}
+
 
 .progress-head {
     display: flex;
+    align-items: center;
     justify-content: space-between;
-    align-items: flex-start;
-
-    gap: 12px;
-    flex-wrap: wrap;
+    gap: 20px;
 }
+
 
 .progress-head h2 {
-    margin-bottom: 2px;
+    margin-bottom: 4px;
 }
 
+
 #progressText {
-    color: var(--muted);
+    color: #667085;
     font-size: 0.9rem;
 }
+
+
+/* FILTERS */
 
 .filters {
     display: flex;
-    gap: 4px;
-
-    background: #eef0f5;
-    padding: 4px;
-
-    border-radius: 12px;
+    gap: 6px;
 }
+
 
 .filter {
-    border: none;
-    background: transparent;
-
-    padding: 6px 14px;
-
-    border-radius: 8px;
-
-    color: var(--muted);
-
-    font-weight: 500;
-    font-size: 0.9rem;
-
-    transition:
-        background 0.2s,
-        color 0.2s,
-        transform 0.2s;
+    border: 1px solid #d8deea;
+    background: white;
+    color: #475467;
+    padding: 7px 12px;
+    border-radius: 7px;
+    font-family: inherit;
+    font-weight: 700;
+    cursor: pointer;
 }
+
 
 .filter.active {
-    background: var(--navy);
-    color: #f6dc8f;
-}
-
-.filter:not(.active):hover {
-    background: #fff;
-    color: var(--navy);
-    transform: translateY(-1px);
+    background: #172033;
+    color: white;
+    border-color: #172033;
 }
 
 
-/* =========================
-   PROGRESS BAR
-========================= */
+/* PROGRESS BAR */
 
 .bar {
-    height: 10px;
-
-    background: #eef0f5;
-
-    border-radius: 99px;
-
-    margin: 16px 0 20px;
-
+    height: 8px;
+    background: #e9edf5;
+    border-radius: 20px;
+    margin: 20px 0;
     overflow: hidden;
 }
 
-.bar span {
-    display: block;
 
+#barFill {
+    display: block;
     height: 100%;
     width: 0;
-
-    background: var(--gold);
-
-    border-radius: 99px;
-
-    transition: width 0.4s ease;
-
-    background-image:
-        linear-gradient(
-            110deg,
-            transparent 30%,
-            rgba(255, 255, 255, 0.55) 50%,
-            transparent 70%
-        ),
-        var(--gold);
-
-    background-size:
-        200% 100%,
-        100% 100%;
-
-    animation: shimmer 2.4s linear infinite;
-}
-
-@keyframes shimmer {
-    from {
-        background-position: 200% 0, 0 0;
-    }
-
-    to {
-        background-position: -100% 0, 0 0;
-    }
+    background: #5969d8;
+    border-radius: 20px;
+    transition: width 0.3s ease;
 }
 
 
-/* =========================
-   TASK LIST
-========================= */
-
-#taskList {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
+/* TASK */
 
 .task {
-    display: grid;
-
-    grid-template-columns: auto 1fr auto;
-
+    display: flex;
+    align-items: flex-start;
     gap: 14px;
-
-    align-items: start;
-
-    padding: 16px;
-
-    border-radius: 12px;
-
-    background: #fff;
-
-    border: 1.5px solid var(--line);
-
-    border-left: 6px solid var(--gold-solid);
-
-    animation: pop 0.25s ease;
-
-    transition:
-        transform 0.25s ease,
-        box-shadow 0.25s ease,
-        border-color 0.25s ease,
-        background 0.25s ease;
-}
-
-.task:hover {
-    transform: translateX(8px);
-
-    box-shadow:
-        0 10px 24px rgba(15, 23, 42, 0.14),
-        -6px 0 0 -2px rgba(224, 176, 79, 0.5);
-
-    border-color: #d9c48f;
-
-    background: linear-gradient(
-        90deg,
-        #fffaf0 0%,
-        #fff 60%
-    );
+    padding: 18px 0;
+    border-bottom: 1px solid #edf0f5;
 }
 
 
-/* =========================
-   COMPLETED TASK
-========================= */
-
-.task.done {
-    background: #f3faf6;
-    border-left-color: var(--done);
-}
-
-.task.done h3,
-.task.done p {
-    text-decoration: line-through;
-    color: var(--muted);
-}
-
-.task.done:hover {
-    background: linear-gradient(
-        90deg,
-        #e6f6ee 0%,
-        #fff 60%
-    );
-
-    border-color: #9bd5b8;
+.task:last-child {
+    border-bottom: none;
 }
 
 
-/* =========================
-   TASK CONTENT
-========================= */
+.task > input[type="checkbox"] {
+    margin-top: 5px;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
 
 .task-body {
-    order: 2;
+    flex: 1;
     min-width: 0;
 }
 
-.task-top {
-    display: contents;
-}
 
-.task h3 {
-    font-size: 1.1rem;
-
-    margin-bottom: 4px;
-
-    overflow-wrap: anywhere;
-
-    transition: color 0.2s;
-}
-
-.task p {
-    color: var(--muted);
-
-    overflow-wrap: anywhere;
-}
-
-.task:hover h3 {
-    color: #7a5a14;
-}
-
-.task.done:hover h3 {
-    color: var(--muted);
+.task-body h3 {
+    font-size: 1rem;
+    margin-bottom: 5px;
 }
 
 
-/* =========================
-   CHECKBOX
-========================= */
-
-.task input[type="checkbox"] {
-    width: 22px;
-    height: 22px;
-
-    margin-top: 2px;
-
-    accent-color: #047857;
-
-    cursor: pointer;
-
-    transition: transform 0.2s;
-}
-
-.task input[type="checkbox"]:hover {
-    transform: scale(1.2);
+.task-body p {
+    color: #667085;
+    font-size: 0.9rem;
+    line-height: 1.5;
 }
 
 
-/* =========================
-   TASK STATUS
-========================= */
+.task.done h3 {
+    text-decoration: line-through;
+    opacity: 0.6;
+}
 
-.status {
-    display: inline-block;
 
+.task.done .task-body > p {
+    opacity: 0.6;
+}
+
+
+/* STATUS */
+
+.task-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
     margin-top: 9px;
+}
 
+
+.status,
+.priority {
+    display: inline-block;
     padding: 5px 11px;
-
     border-radius: 7px;
-
     font-size: 0.8rem;
-
     font-weight: 700;
-
     line-height: 1.2;
-
     letter-spacing: 0.2px;
 }
 
 
-/* Pending status */
+/* TASK STATUS */
 
 .status.pending {
     background: #fff3cd;
     color: #856404;
-
     border: 1px solid #f1d98b;
 }
 
 
-/* Completed status */
-
 .status.completed {
     background: #d4edda;
     color: #155724;
-
     border: 1px solid #a9d6b5;
 }
 
 
-/* =========================
-   DELETE BUTTON
-========================= */
+/* PRIORITY */
+
+.priority-high {
+    background: #f8d7da;
+    color: #842029;
+    border: 1px solid #f1aeb5;
+}
+
+
+.priority-medium {
+    background: #fff3cd;
+    color: #856404;
+    border: 1px solid #f1d98b;
+}
+
+
+.priority-low {
+    background: #d1ecf1;
+    color: #0c5460;
+    border: 1px solid #abdde5;
+}
+
+
+/* DELETE */
 
 .delete {
-    order: 3;
-
-    border: 1.5px solid var(--danger);
-
-    background: #fff;
-
-    color: var(--danger);
-
-    font-size: 0.85rem;
-
+    border: none;
+    background: transparent;
+    color: #c0392b;
+    font-family: inherit;
     font-weight: 700;
-
-    padding: 4px 12px;
-
-    border-radius: 8px;
-
-    transition:
-        background 0.2s,
-        color 0.2s,
-        transform 0.2s,
-        box-shadow 0.2s;
+    cursor: pointer;
+    padding: 4px 0;
 }
+
 
 .delete:hover {
-    background: var(--danger);
-
-    color: #fff;
-
-    transform: scale(1.08);
-
-    box-shadow:
-        0 4px 10px rgba(185, 28, 28, 0.3);
+    text-decoration: underline;
 }
 
 
-/* =========================
-   EMPTY MESSAGE
-========================= */
+/* EMPTY */
 
 .empty {
     text-align: center;
-
-    color: var(--muted);
-
-    padding: 30px 10px;
+    color: #667085;
+    padding: 35px 10px;
 }
 
 
-/* =========================
-   ANIMATION
-========================= */
-
-@keyframes pop {
-    from {
-        opacity: 0;
-        transform: translateY(6px);
-    }
-
-    to {
-        opacity: 1;
-        transform: none;
-    }
-}
-
-
-/* =========================
-   RESPONSIVE DESIGN
-========================= */
+/* RESPONSIVE */
 
 @media (max-width: 800px) {
 
@@ -706,24 +358,29 @@ button:focus-visible {
         grid-template-columns: 1fr;
     }
 
-    .task-form {
-        position: static;
-    }
-
-    .task:hover {
-        transform: translateY(-3px);
-    }
 }
 
 
-/* =========================
-   REDUCED MOTION
-========================= */
+@media (max-width: 600px) {
 
-@media (prefers-reduced-motion: reduce) {
-
-    * {
-        animation: none !important;
-        transition: none !important;
+    .hero h1 {
+        font-size: 2rem;
     }
+
+
+    .progress-head {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+
+    .task {
+        gap: 10px;
+    }
+
+
+    .delete {
+        font-size: 0.85rem;
+    }
+
 }

@@ -17,19 +17,17 @@
 <body>
 
     <header class="hero">
-
         <h1>Student Task Management System</h1>
 
         <p class="subtitle">
             Plan, organize and complete your academic tasks easily.
         </p>
-
     </header>
 
 
     <main class="layout">
 
-        <!-- Add New Task Section -->
+        <!-- ADD TASK FORM -->
         <section class="task-form">
 
             <h2>Add New Task</h2>
@@ -52,6 +50,16 @@
             ></textarea>
 
 
+            <!-- NEW PRIORITY FIELD -->
+            <label for="taskPriority">Priority</label>
+
+            <select id="taskPriority">
+                <option value="High">High</option>
+                <option value="Medium" selected>Medium</option>
+                <option value="Low">Low</option>
+            </select>
+
+
             <button class="btn-primary" onclick="addTask()">
                 Add task
             </button>
@@ -61,24 +69,25 @@
         </section>
 
 
-        <!-- Student Tasks Section -->
+        <!-- TASK SECTION -->
         <section class="task-section">
 
             <div class="progress-head">
 
                 <div>
-
                     <h2>Student Tasks</h2>
 
                     <p id="progressText">
                         0 of 0 done
                     </p>
-
                 </div>
 
 
-                <!-- Task Filters -->
-                <div class="filters" role="group" aria-label="Filter tasks">
+                <div
+                    class="filters"
+                    role="group"
+                    aria-label="Filter tasks"
+                >
 
                     <button
                         class="filter active"
@@ -106,15 +115,11 @@
             </div>
 
 
-            <!-- Progress Bar -->
             <div class="bar">
-
                 <span id="barFill"></span>
-
             </div>
 
 
-            <!-- Tasks will appear here -->
             <div id="taskList"></div>
 
         </section>
