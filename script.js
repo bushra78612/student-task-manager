@@ -3,43 +3,64 @@ const defaultTasks = [
         id: 1,
         title: "Complete DevOps Assignment",
         description: "Complete the Git and GitHub practical assignment.",
-        done: true
+        done: true,
+        priority: "High"
     },
+
     {
         id: 2,
         title: "Study Database Systems",
         description: "Review database concepts and SQL queries.",
-        done: false
+        done: false,
+        priority: "Medium"
     },
+
     {
         id: 3,
         title: "Prepare Presentation",
         description: "Prepare slides for the upcoming university presentation.",
-        done: false
+        done: false,
+        priority: "Low"
     }
 ];
 
+
 let tasks = loadTasks();
+
 let currentFilter = "all";
 
 
+// LOAD TASKS
 function loadTasks() {
 
     try {
 
         const saved = localStorage.getItem("studentTasks");
 
-        return saved ? JSON.parse(saved) : defaultTasks;
+        if (saved) {
+
+            const loadedTasks = JSON.parse(saved);
+
+            // Add Medium priority to older tasks
+            // that were created before priority was added.
+            return loadedTasks.map(task => ({
+                ...task,
+                priority: task.priority || "Medium"
+            }));
+
+        }
+
+        return defaultTasks;
 
     } catch (e) {
 
         return defaultTasks;
 
     }
-
 }
 
 
+// SAVE TASKS
 function saveTasks() {
 
     try {
@@ -51,11 +72,12 @@ function saveTasks() {
 
     } catch (e) {
 
+        // Storage unavailable
     }
-
 }
 
 
+// ESCAPE HTML
 function escapeHTML(text) {
 
     const div = document.createElement("div");
@@ -63,10 +85,10 @@ function escapeHTML(text) {
     div.textContent = text;
 
     return div.innerHTML;
-
 }
 
 
+// ADD TASK
 function addTask() {
 
     const titleInput =
@@ -74,6 +96,9 @@ function addTask() {
 
     const descInput =
         document.getElementById("taskDescription");
+
+    const priorityInput =
+        document.getElementById("taskPriority");
 
     const errorMessage =
         document.getElementById("errorMessage");
@@ -85,21 +110,25 @@ function addTask() {
     const description =
         descInput.value.trim();
 
+    const priority =
+        priorityInput.value;
 
+
+    // VALIDATION
     if (title === "" || description === "") {
 
         errorMessage.textContent =
             "Please enter both task title and description.";
 
         return;
-
     }
 
 
     errorMessage.textContent = "";
 
 
-    tasks.unshift({
+    // CREATE NEW TASK
+    const newTask = {
 
         id: Date.now(),
 
@@ -107,25 +136,32 @@ function addTask() {
 
         description: description,
 
-        done: false
+        done: false,
 
-    });
+        priority: priority
 
+    };
+
+
+    tasks.unshift(newTask);
 
     saveTasks();
 
     renderTasks();
 
 
+    // CLEAR INPUTS
     titleInput.value = "";
 
     descInput.value = "";
 
-    titleInput.focus();
+    priorityInput.value = "Medium";
 
+    titleInput.focus();
 }
 
 
+// TOGGLE TASK
 function toggleTask(id) {
 
     const task =
@@ -142,10 +178,10 @@ function toggleTask(id) {
     saveTasks();
 
     renderTasks();
-
 }
 
 
+// DELETE TASK
 function deleteTask(id) {
 
     tasks =
@@ -155,10 +191,29 @@ function deleteTask(id) {
     saveTasks();
 
     renderTasks();
-
 }
 
 
+// GET PRIORITY CLASS
+function getPriorityClass(priority) {
+
+    if (priority === "High") {
+
+        return "priority-high";
+
+    }
+
+    if (priority === "Low") {
+
+        return "priority-low";
+
+    }
+
+    return "priority-medium";
+}
+
+
+// RENDER TASKS
 function renderTasks() {
 
     const taskList =
@@ -169,14 +224,19 @@ function renderTasks() {
         tasks.filter(t =>
 
             currentFilter === "all"
+
                 ? true
+
                 : currentFilter === "done"
+
                     ? t.done
+
                     : !t.done
 
         );
 
 
+    // NO TASKS
     if (visible.length === 0) {
 
         taskList.innerHTML =
@@ -184,7 +244,9 @@ function renderTasks() {
                 No tasks here yet. Add one to get started.
             </p>`;
 
-    } else {
+    }
+
+    else {
 
         taskList.innerHTML = visible.map(t => `
 
@@ -204,16 +266,24 @@ function renderTasks() {
                         ${escapeHTML(t.title)}
                     </h3>
 
+
                     <p>
                         ${escapeHTML(t.description)}
                     </p>
 
 
-                    <span class="status ${t.done ? "completed" : "pending"}">
+                    <div class="task-meta">
 
-                        ${t.done ? "Completed" : "Pending"}
+                        <span class="status ${t.done ? "completed" : "pending"}">
+                            ${t.done ? "Completed" : "Pending"}
+                        </span>
 
-                    </span>
+
+                        <span class="priority ${getPriorityClass(t.priority)}">
+                            Priority: ${escapeHTML(t.priority)}
+                        </span>
+
+                    </div>
 
                 </div>
 
@@ -232,6 +302,7 @@ function renderTasks() {
     }
 
 
+    // PROGRESS
     const doneCount =
         tasks.filter(t => t.done).length;
 
@@ -242,16 +313,20 @@ function renderTasks() {
             : 0;
 
 
-    document.getElementById("progressText").textContent =
+    document.getElementById(
+        "progressText"
+    ).textContent =
         `${doneCount} of ${tasks.length} done`;
 
 
-    document.getElementById("barFill").style.width =
+    document.getElementById(
+        "barFill"
+    ).style.width =
         percent + "%";
-
 }
 
 
+// FILTER BUTTONS
 document.querySelectorAll(".filter").forEach(btn => {
 
     btn.addEventListener("click", () => {
@@ -275,4 +350,5 @@ document.querySelectorAll(".filter").forEach(btn => {
 });
 
 
+// INITIAL RENDER
 renderTasks();
